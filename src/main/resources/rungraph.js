@@ -1,10 +1,6 @@
 /* global bp */
 importPackage(Packages.com.mxgraph.model);
 
-function log(str) {
-	bp.log.info(str+"="+eval(str));
-}
-
 function goToFollowers(c, contxt, ths, bp) {
 
 	var edg = mxGraphModel.getEdges(model, c, false, true, true);

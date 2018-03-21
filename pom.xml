@@ -29,7 +29,7 @@
 		<dependency>
 			<groupId>com.github.bthink-bgu</groupId>
 			<artifactId>BPjs</artifactId>
-			<version>0.8.6</version>
+			<version>0.9.1</version>
 		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/javax.websocket/javax.websocket-api -->

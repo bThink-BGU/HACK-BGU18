@@ -19,10 +19,10 @@ import com.mxgraph.model.mxGraphModel;
 import com.mxgraph.model.mxGraphModel.Filter;
 import com.mxgraph.util.mxXmlUtils;
 
-import il.ac.bgu.cs.bp.bpjs.bprogram.runtimeengine.BProgram;
-import il.ac.bgu.cs.bp.bpjs.bprogram.runtimeengine.BProgramRunner;
-import il.ac.bgu.cs.bp.bpjs.bprogram.runtimeengine.SingleResourceBProgram;
-import il.ac.bgu.cs.bp.bpjs.bprogram.runtimeengine.listeners.PrintBProgramRunnerListener;
+import il.ac.bgu.cs.bp.bpjs.execution.BProgramRunner;
+import il.ac.bgu.cs.bp.bpjs.execution.listeners.PrintBProgramRunnerListener;
+import il.ac.bgu.cs.bp.bpjs.model.BProgram;
+import il.ac.bgu.cs.bp.bpjs.model.SingleResourceBProgram;
 
 public class RunServlet extends HttpServlet {
 
@@ -92,12 +92,7 @@ public class RunServlet extends HttpServlet {
 
 		thread = new Thread() {
 			public void run() {
-				// go!
-				try {
-					rnr.start();
-				} catch (InterruptedException e) {
-					LOG.info("BProgram runner interrupted");
-				}
+				rnr.run();
 			}
 		};
 

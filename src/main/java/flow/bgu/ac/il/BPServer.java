@@ -14,7 +14,7 @@ import org.eclipse.jetty.websocket.jsr356.server.deploy.WebSocketServerContainer
 public class BPServer {
 	private Server server;
 
-	public void init(String[] arguments) {
+	public void init(String[] arguments) throws Exception {
 		int port = 8090;
 		if(arguments.length > 0) {
 			port = Integer.parseInt(arguments[0]);
@@ -50,19 +50,19 @@ public class BPServer {
 		System.out.println(">> Go to http://localhost:" + port + "/editor/index.html");
 	}
 	
-	public void start() {
+	public void start() throws Exception {
 		server.start();
 	}
 	
-	public void stop() {
+	public void stop() throws Exception {
 		server.stop();
 	}
 	
-	public void join() {
+	public void join() throws Exception {
 		server.join();
 	}
 	
-	public void destroy() {
+	public void destroy() throws Exception {
 		
 	}
 

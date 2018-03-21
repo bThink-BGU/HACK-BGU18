@@ -12,17 +12,16 @@ import org.eclipse.jetty.websocket.jsr356.server.ServerContainer;
 import org.eclipse.jetty.websocket.jsr356.server.deploy.WebSocketServerContainerInitializer;
 
 public class BPServer {
-	public static int PORT = 8090;
+	private Server server;
 
-
-	/**
-	 * Point your browser to the displayed URL
-	 */
-	public static void main(String[] args) throws Exception {
-		Server server = new Server(PORT); 
+	public void init(String[] arguments) {
+		int port = 8090;
+		if(arguments.length > 0) {
+			port = Integer.parseInt(arguments[0]);
+		}
+		server = new Server(port); 
 
 		// Servlets
-
 		ServletContextHandler context = new ServletContextHandler(ServletContextHandler.SESSIONS);
 		context.setContextPath("/");
 		server.setHandler(context);
@@ -48,9 +47,33 @@ public class BPServer {
 		handlers.setHandlers(new Handler[] { fileHandler, context});
 		server.setHandler(handlers);
 
-		System.out.println(">> Go to http://localhost:" + PORT + "/editor/index.html");
-
+		System.out.println(">> Go to http://localhost:" + port + "/editor/index.html");
+	}
+	
+	public void start() {
 		server.start();
+	}
+	
+	public void stop() {
+		server.stop();
+	}
+	
+	public void join() {
 		server.join();
+	}
+	
+	public void destroy() {
+		
+	}
+
+	/**
+	 * Point your browser to the displayed URL
+	 */
+	public static void main(String[] args) throws Exception {
+		BPServer bpserver = new BPServer();
+		bpserver.init(args);
+		bpserver.start();
+		bpserver.join();
+		bpserver.stop();
 	}
 }

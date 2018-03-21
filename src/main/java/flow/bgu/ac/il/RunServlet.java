@@ -92,7 +92,13 @@ public class RunServlet extends HttpServlet {
 
 		thread = new Thread() {
 			public void run() {
-				rnr.run();
+				// go!
+				try {
+					rnr.run();
+					throw new InterruptedException();
+				} catch (InterruptedException e) {
+					LOG.info("BProgram runner interrupted");
+				}
 			}
 		};
 

@@ -53,10 +53,10 @@ public class MoodleRestClient {
         return response.toString();
 	}
 	
-//    public static void main(String[] args) throws ProtocolException, IOException {
-//        MoodleRestClient client = new MoodleRestClient();
-//        client.sendRest(MoodleOperation.getUserByField.getOperation() + "&field=username&values%5B0%5D=mgenah");
+    public static void main(String[] args) throws ProtocolException, IOException {
+        MoodleRestClient client = new MoodleRestClient();
+        client.sendRest(MoodleOperation.getUserByField.getOperation() + "&field=username&values%5B0%5D=mgenah");
 //        client.sendRest(MoodleOperation.listUserCourses.getOperation() + "&userid=" + 3);
 //        client.sendRest(MoodleOperation.getCourses.getOperation()+URLEncoder.encode("options[ids]["+0+"]", "UTF-8") + "=3");// + "&field=idnumber&values%5B0%5D=11111");
-//    }
+    }
 }

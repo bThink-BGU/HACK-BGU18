@@ -15,18 +15,23 @@ public class MoodleServiceImpl implements MoodleService {
 		serializationUtils = new SerializationUtils();
 	}
 	
-	public String listCoursesOfUser(String username) throws IOException {
+	public String listCoursesOfUser(String username) throws Exception {
 		User user = getUserByUsername(username);
-		return getCoursesOfUserById(user.Id);
+		return getCoursesOfUserById(user.id);
 	}
 
 	
-	public String getUser(String username) throws IOException {
+	public String getUser(String username) throws Exception {
 		User user = getUserByUsername(username);
-		String getCourses = MoodleOperation.listUserCourses.getOperation() + "&userid=" + user.Id;
-		List<Course> serCourses = serializationUtils.deserialize(restClient.sendRest(getCourses), List.class);
-		user.CourseIds = serCourses.stream().map(course -> course.Id).collect(Collectors.toList());
+		String getCourses = MoodleOperation.listUserCourses.getOperation() + "&userid=" + user.id;
+		List<Course> serCourses = ((List<Course>)serializationUtils.deserializeGeneric(restClient.sendRest(getCourses), TypeReferenceSerializationHelper.class, List.class, Course.class));
+		user.courseIds = serCourses.stream().map(course -> course.id).collect(Collectors.toList());
 		return serializationUtils.serialize(user);
+	}
+	
+	public static void main(String[] args) throws Exception{
+		MoodleServiceImpl service = new MoodleServiceImpl();
+		System.out.println(service.getUser("mgenah"));
 	}
 	
 	public String getAllUsers() throws IOException {
@@ -39,7 +44,8 @@ public class MoodleServiceImpl implements MoodleService {
 		return restClient.sendRest(getCourses);
 	}
 	
-	private User getUserByUsername(String username) throws IOException {
-		return serializationUtils.deserialize(restClient.sendRest(MoodleOperation.getUserByField.getOperation() + "&field=username&value="+username), User.class);
+	private User getUserByUsername(String username) throws Exception {
+		String user = restClient.sendRest(MoodleOperation.getUserByField.getOperation() + "&field=username&values%5B0%5D="+username);
+		return ((List<User>)serializationUtils.deserializeGeneric(user, TypeReferenceSerializationHelper.class, List.class, User.class)).get(0);
 	}
 }

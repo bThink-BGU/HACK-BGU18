@@ -1,16 +1,26 @@
 package hackbgu.bgu.ac.il.services;
 
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 
+import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 
 public class SerializationUtils {
 	protected final ObjectMapper mapper;
+	
+	public interface SubtypesRegistry {
+		List<Class<?>> getSubtypes();
+	}
 
 	public SerializationUtils() {
 		mapper = new ObjectMapper(); //This is thread safe
@@ -41,6 +51,22 @@ public class SerializationUtils {
 			throw e;
 		}
 	}
+	
+	public Object deserializeGeneric(String json, Class<?> serializationHelper, Class<?> generic, Class<?> genericReturnType) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, IOException, JsonParseException, JsonMappingException {
+		String staticMethodNameForGettingTypeReference = (TypeReference.class.getName()+'_'+generic.getName()+'_'+genericReturnType.getName()).replace('.', '_');
+		Method staticMethodForGettingTypeReference = serializationHelper.getDeclaredMethod(staticMethodNameForGettingTypeReference);
+		staticMethodForGettingTypeReference.setAccessible(true);
+ 		@SuppressWarnings("rawtypes")
+		TypeReference valueTypeRef = (TypeReference) staticMethodForGettingTypeReference.invoke(null, (Object[])null);
+		Object result = getObjectMapper().readValue(json, valueTypeRef);
+		return result;
+	}
+	
+//	private static TypeReference<List<MoodleUser>> com_fasterxml_jackson_core_type_TypeReference_java_util_List_hackbgu_bgu_ac_il_services_MoodleUser(){
+//        return new TypeReference<List<MoodleUser>>() {
+//            //Empty
+//        };
+//    }
 
 	public ObjectMapper getObjectMapper() {
 		return mapper;

@@ -3,11 +3,11 @@ package hackbgu.bgu.ac.il.model;
 import java.util.List;
 
 public class User {
-	public String Id;
-	public String Username;
-	public String FirstName;
-	public String Surname;
-	public String Email;
-	public List<String> CourseIds;
-	public String ReceptionHours;
+	public String id;
+	public String username;
+	public String firstname;
+	public String lastname;
+	public String email;
+	public List<String> courseIds;
+	public String officehours;
 }

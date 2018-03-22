@@ -34,12 +34,8 @@ export function createTranslateLoader(http: HttpClient) {
             }
         }),
         AppRoutingModule,
-<<<<<<< HEAD
         AngularFireModule.initializeApp(environment.firebase),
     	AngularFireDatabaseModule
-=======
-
->>>>>>> bd127652a4283850619b33d53be306de8fd29b14
     ],
     declarations: [AppComponent],
     providers: [AuthGuard],

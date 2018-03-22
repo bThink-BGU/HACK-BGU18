@@ -4,10 +4,10 @@ import java.util.List;
 
 public class Course {
 	public String id;
-	public String name;
-	public List<String> LecturerIds;
-	public List<String> TaIds;
-	public List<String> StudentIds;
-	public String MoedA;
-	public String MoedB;
+	public String fullname;
+//	public List<String> LecturerIds;
+//	public List<String> TaIds;
+//	public List<String> StudentIds;
+//	public String MoedA;
+//	public String MoedB;
 }

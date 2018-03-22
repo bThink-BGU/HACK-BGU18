@@ -43,15 +43,15 @@ public class DashboardServlet extends HttpServlet {
 		String[] reqParsed = StringUtils.split(requestURI, "/");
 		
 		if (reqParsed[0].equals("courses")){
-			return runInMoodle(()->moodleService.listCoursesOfUser(reqParsed[1]));
+			return runInMoodle(()->moodleService.getCourse(reqParsed[1]));
 		}
 		else if (reqParsed[0].equals("users")){
 			if (reqParsed.length == 2){
-				return runInMoodle(()->moodleService.listCoursesOfUser(reqParsed[1]));
+				return runInMoodle(()->moodleService.getUser(reqParsed[1]));
 			}
-			else if (reqParsed.length == 4){
-				return runInMoodle(()->moodleService.listCoursesOfUser(reqParsed[1]));
-			}
+//			else if (reqParsed.length == 4){
+//				return runInMoodle(()->moodleService.listCoursesOfUser(reqParsed[1]));
+//			}
 		}
 		return null;
 	}

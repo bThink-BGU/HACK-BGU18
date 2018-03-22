@@ -7,13 +7,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import hackbgu.bgu.ac.il.model.Course;
 import hackbgu.bgu.ac.il.model.User;
 
-public class TypeReferenceSerializationHelper/* implements SubtypesRegistry */{
-	private static TypeReference<List<MoodleUser>> com_fasterxml_jackson_core_type_TypeReference_java_util_List_hackbgu_bgu_ac_il_services_MoodleUser(){
-        return new TypeReference<List<MoodleUser>>() {
-            //Empty
-        };
-    }
-	
+public class TypeReferenceSerializationHelper {	
 	private static TypeReference<List<User>> com_fasterxml_jackson_core_type_TypeReference_java_util_List_hackbgu_bgu_ac_il_model_User(){
         return new TypeReference<List<User>>() {
             //Empty

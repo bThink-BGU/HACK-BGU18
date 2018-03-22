@@ -99,7 +99,16 @@ Actions.prototype.init = function() {
 		}
 	});
 
-	
+	this.addAction('editBsync', function() {
+		var cell = graph.getSelectionCell() || graph.getModel().getRoot();
+
+		if (cell != null) {
+  			var dlg = new BSyncForm(ui, cell);
+			ui.showDialog(dlg.container, 520, 420, true, true);
+			dlg.init();
+		}
+	});
+
 
 	this.addAction('pageSetup...', function() {
 		ui.showDialog(new PageSetupDialog(ui).container, 320, 220, true, true);

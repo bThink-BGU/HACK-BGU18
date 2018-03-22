@@ -27,6 +27,41 @@
             </div>
         </div>
     </div>
+    <div>{{(obj | async)?.fruit}}</div>
+    <div class="card-header">
+                    רשימת קורסים לסמסטר
+    </div>
+            <div class="card-body table-responsive">
+                <table class="table">
+                    <thead>
+                <tr>
+                        <th>#</th>
+                        <th>שם הקורס</th>
+                        <th>מספר הקורס</th>
+                        <th>כיתת לימוד ושעה</th>
+                        <th>כיתת תרגול ושעה</th>
+                </tr>
+                </thead>
+                   <tbody>
+                <tr>
+                       <th scope="row">1</th>
+                       <td>Mark</td>
+                        <td>Otto</td>
+                    </tr>
+                <tr>
+                        <th scope="row">2</th>
+                        <td>Jacob</td>
+                        <td>Thornton</td>
+                    </tr>
+                <tr>
+                        <th scope="row">3</th>
+                        <td>Larry</td>
+                        <td>the Bird</td>
+                    </tr>
+               </tbody>
+                </table>
+            </div>
+    <!--<app-config></app-config>-->
     <!--<div class="row">-->
         <!--<div class="col col-sm-6">-->
             <!--<div class="card mb-3">-->

@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { routerTransition } from '../../router.animations';
+import { Config, ConfigService } from '../../config/config.service';
+import {Observable} from 'rxjs/Observable';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
     selector: 'app-charts',
@@ -8,6 +11,11 @@ import { routerTransition } from '../../router.animations';
     animations: [routerTransition()]
 })
 export class ChartsComponent implements OnInit {
+    lovelystring;
+    config;
+    obj: Observable<any>;
+
+
     // bar chart
     public barChartOptions: any = {
         scaleShowVerticalLines: false,
@@ -157,7 +165,15 @@ export class ChartsComponent implements OnInit {
          */
     }
 
-    constructor() {}
+    constructor(private configService: ConfigService) {}
 
-    ngOnInit() {}
+    showConfig() {
+        this.configService.getConfig_1()
+            .subscribe(data => this.config = data);
+             this.obj = JSON.parse(this.config);
+    }
+
+    ngOnInit() {
+        this.showConfig();
+    }
 }

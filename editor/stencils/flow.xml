@@ -12,13 +12,14 @@
 				<line x="0" y="25" />
 				<close />
 			</path>
+
 		</background>
 		<foreground>
 			<fillstroke />
 		</foreground>
 	</shape>
-	<shape aspect="fixed" h="99" name="General Start" strokewidth="inherit"
-		w="99">
+	<shape aspect="fixed" h="50" name="General Start" strokewidth="inherit"
+		w="50">
 		<connections>
 			<constraint name="N" perimeter="0" x="0.5" y="0" />
 			<constraint name="S" perimeter="0" x="0.5" y="1" />
@@ -30,10 +31,13 @@
 			<constraint name="SE" perimeter="0" x="0.855" y="0.855" />
 		</connections>
 		<background>
-			<ellipse h="99" w="99" x="0" y="0" />
+			<ellipse h="50" w="50" x="0" y="0" />
+
 		</background>
-		<foreground>
-			<fillstroke />
+		<foreground>	
+		    <fillstroke />
+			<text str="node" x="25" y="25" align="center" valign="middle"/>
+		
 		</foreground>
 	</shape>
 	<shape name="BSync" h="25" w="100" aspect="variable" strokewidth="inherit">

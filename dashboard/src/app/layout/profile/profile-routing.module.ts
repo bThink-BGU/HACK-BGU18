@@ -4,7 +4,8 @@ import { ProfileComponent } from './profile.component';
 
 const routes: Routes = [
     {
-        path: '', component: ProfileComponent
+    	path: '',
+        component: ProfileComponent
     }
 ];
 
@@ -12,5 +13,5 @@ const routes: Routes = [
     imports: [RouterModule.forChild(routes)],
     exports: [RouterModule]
 })
-export class ProfileRoutingModule {
-}
+
+export class ProfileRoutingModule {}

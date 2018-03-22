@@ -407,7 +407,7 @@ Menus.prototype.init = function()
 	})));
 	this.put('arrange', new Menu(mxUtils.bind(this, function(menu, parent)
 	{
-		this.addMenuItems(menu, ['toFront', 'toBack', '-'], parent);
+		//this.addMenuItems(menu, ['toFront', 'toBack', '-'], parent);
 		this.addSubmenu('direction', menu, parent);
 		this.addMenuItems(menu, ['turn', '-'], parent);
 		this.addSubmenu('align', menu, parent);
@@ -425,9 +425,9 @@ Menus.prototype.init = function()
 	this.put('view', new Menu(mxUtils.bind(this, function(menu, parent)
 	{
 		this.addMenuItems(menu, ((this.editorUi.format != null) ? ['formatPanel'] : []).
-			concat(['outline', 'layers', '-', 'pageView', 'pageScale', '-', 'scrollbars', 'tooltips', '-',
-			        'grid', 'guides', '-', 'connectionArrows', 'connectionPoints', '-',
-			        'resetView', 'zoomIn', 'zoomOut'], parent));
+			concat(['-','tooltips', '-',
+			        'grid', 'guides', 'connectionArrows', 'connectionPoints', '-',
+			        'resetView'], parent));
 	})));
 	// Two special dropdowns that are only used in the toolbar
 	this.put('viewPanels', new Menu(mxUtils.bind(this, function(menu, parent)

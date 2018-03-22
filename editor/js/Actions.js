@@ -132,8 +132,7 @@ Actions.prototype.init = function() {
 					mxClipboard.paste(graph);
 				}
 			}, false, 'sprite-paste', Editor.ctrlKey + '+V');
-	this
-			.addAction(
+	this.addAction(
 					'pasteHere',
 					function(evt) {
 						if (graph.isEnabled()
@@ -291,12 +290,21 @@ Actions.prototype.init = function() {
 	this.addAction('toBack', function() {
 		graph.orderCells(true);
 	}, null, null, Editor.ctrlKey + '+Shift+B');
+	this.addAction('fliphor', function() {
+		//graph.orderCells(true);
+	}, null, null, Editor.ctrlKey + '+Shift+H');
+	this.addAction('fliphver', function() {
+		//graph.orderCells(true);
+	}, null, null, Editor.ctrlKey + '+Shift+V');
+	this.addAction('rotate', function() {
+		//graph.orderCells(true);
+	}, null, null, Editor.ctrlKey + '+Shift+R');
 
-	// Gera
-	this.addAction('step', function() {
-		webSocket.send("XXXX");
-		// graph.orderCells(true);
-	}, null, null, Editor.ctrlKey + '+Shift+S');
+//	// Gera
+//	this.addAction('step', function() {
+//		webSocket.send("XXXX");
+//		// graph.orderCells(true);
+//	}, null, null, Editor.ctrlKey + '+Shift+S');
 
 	this.addAction('group', function() {
 		if (graph.getSelectionCount() == 1) {

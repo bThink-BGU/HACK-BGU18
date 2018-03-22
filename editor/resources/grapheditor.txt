@@ -315,3 +315,6 @@ zoomIn=Zoom In
 zoomOut=Zoom Out
 runModel=Deploy
 editCode=Edit Code
+fliphor=Flip Horizontal
+fliphver=Flip Vertical
+rotate=Rotate

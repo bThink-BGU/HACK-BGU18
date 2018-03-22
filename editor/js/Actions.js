@@ -105,7 +105,7 @@ Actions.prototype.init = function() {
 		if (cell != null) {
   			var dlg = new BSyncForm(ui, cell);
 			ui.showDialog(dlg.container, 520, 420, true, true);
-			dlg.init();
+			//dlg.init();
 		}
 	});
 

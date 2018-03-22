@@ -17,7 +17,7 @@ var BSyncForm = function(editorUi,cell)
 	}
 
 	
-	w = 500;
+	w = 800;
 	h = 350;
 	noHide = true;
 	var row, td;
@@ -30,64 +30,67 @@ var BSyncForm = function(editorUi,cell)
 	td = document.createElement('td');
 	td.style.fontSize = '10pt';
 	td.style.width = '100px';
-	mxUtils.write(td, "BSync Form");
+	mxUtils.writeln(tbody, "BSync Form");
+	mxUtils.writeln(tbody, "");
+
 	
 	row.appendChild(td);
 	tbody.appendChild(row);
 
-	row = document.createElement('tr');
-	td = document.createElement('td');
-
-	var nameInput = document.createElement('textarea');
-	var editor;
-	
-	
-	nameInput.value = value.getAttribute('code');
-	
-	nameInput.setAttribute('wrap', 'off');
-	
-	nameInput.setAttribute('spellcheck', 'false');
-	nameInput.setAttribute('autocorrect', 'off');
-	nameInput.setAttribute('autocomplete', 'off');
-	nameInput.setAttribute('autocapitalize', 'off');
-	
-	// mxUtils.write(nameInput, url || '');
-	nameInput.style.resize = 'none';
-	nameInput.style.width = w + 'px';
-	nameInput.style.height = h + 'px';
-	
-	this.textarea = nameInput;
-
-	
 	this.init = function()
 	{
-		nameInput.focus();
-		nameInput.scrollTop = 0;
-		
-		editor = CodeMirror.fromTextArea(this.textarea, {
-		    lineNumbers: true,
-		    // fixedGutter: true,
-		    autofocus: true,
-		});
+
 	};
 
-	td.appendChild(nameInput);
+	mxUtils.write(td, "Request:");
+	var linkInput = document.createElement('input');
+	linkInput.setAttribute('type', 'text');
+	linkInput.style.marginTop = '6px';
+	linkInput.style.width = '400px';
+	linkInput.style.backgroundRepeat = 'no-repeat';
+	linkInput.style.backgroundPosition = '100% 50%';
+	linkInput.style.paddingRight = '14px';
+	td.appendChild(linkInput);
 	row.appendChild(td);
 	
 	tbody.appendChild(row);
+	mxUtils.write(td, "Wait:");
+	var linkInput2 = document.createElement('input');
+	linkInput2.setAttribute('type', 'text');
+	linkInput2.style.marginTop = '6px';
+	linkInput2.style.width = '400px';
+
+	linkInput2.style.backgroundRepeat = 'no-repeat';
+	linkInput2.style.backgroundPosition = '100% 50%';
+	linkInput2.style.paddingRight = '14px';
+	td.appendChild(linkInput2);
+	row.appendChild(td);
+	tbody.appendChild(row);
+	mxUtils.write(td, "Block:");
+	var linkInput3 = document.createElement('input');
+	linkInput3.setAttribute('type', 'text');
+	linkInput3.style.marginTop = '6px';
+	linkInput3.style.width = '400px';
+	linkInput3.style.backgroundRepeat = 'no-repeat';
+	linkInput3.style.backgroundPosition = '100% 50%';
+	linkInput3.style.paddingRight = '14px';
+	td.appendChild(linkInput3);
+	row.appendChild(td);
+	tbody.appendChild(row);
+	
 
 	row = document.createElement('tr');
 	td = document.createElement('td');
 	td.style.paddingTop = '14px';
 	td.style.whiteSpace = 'nowrap';
 	td.setAttribute('align', 'right');
-	
+//	
 	var cancelBtn = mxUtils.button(mxResources.get('cancel'), function()
 	{
 		editorUi.hideDialog();
 	});
 	cancelBtn.className = 'geBtn';
-	
+//	
 	if (editorUi.editor.cancelFirst)
 	{
 		td.appendChild(cancelBtn);
@@ -99,7 +102,7 @@ var BSyncForm = function(editorUi,cell)
 		var genericBtn = mxUtils.button(mxResources.get('apply'), function()
 		{
 			editorUi.hideDialog();
-			value.setAttribute("code", editor.getValue());
+			value.setAttribute("code", "");
 			graph.getModel().setValue(cell, value);
 		});
 		
@@ -109,7 +112,7 @@ var BSyncForm = function(editorUi,cell)
 	
 	if (!editorUi.editor.cancelFirst)
 	{
-		td.appendChild(cancelBtn);
+		td.appendChild(genericBtn);
 	}
 
 	row.appendChild(td);

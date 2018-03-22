@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { routerTransition } from '../../router.animations';
+
+import { HttpClient, HttpResponse, HttpRequest } from '@angular/common/http';
 
 @Component({
     selector: 'app-charts',
@@ -8,6 +11,8 @@ import { routerTransition } from '../../router.animations';
     animations: [routerTransition()]
 })
 export class ChartsComponent implements OnInit {
+
+
     // bar chart
     public barChartOptions: any = {
         scaleShowVerticalLines: false,
@@ -157,7 +162,19 @@ export class ChartsComponent implements OnInit {
          */
     }
 
+    // constructor(private http: HttpClient) {}
     constructor() {}
+    // getConfig() {
+    //     return this.http.get(this.configUrl);
+    // }
+
+    // showConfig() {
+    //     this.configService.getConfig()
+    //         .subscribe(data => this.config = {
+    //             heroesUrl: data['heroesUrl'],
+    //             textfile:  data['textfile']
+    //         });
+    // }
 
     ngOnInit() {}
 }

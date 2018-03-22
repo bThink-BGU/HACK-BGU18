@@ -1,0 +1,32 @@
+<shapes name="DefultFlow">
+	<shape name="Alert about a grade" h="100" w="200" aspect="variable" strokewidth="inherit">
+
+	
+<!DOCTYPE defultFlow SYSTEM "./defultflow.xml" [
+<!ENTITY defultflow SYSTEM "./defultflow.xml">
+]>
+
+<connections>
+	<constraint x="0" y="0.5" perimeter="0" name="W"/>
+	<constraint x="1" y="0.5" perimeter="0" name="E"/>
+</connections>
+
+<background>
+	<path>
+		<move x="98" y="14"/>
+			&defultflow; 
+		<close/>
+	</path>
+</background>
+
+<foreground>
+	<fillstroke/>
+		<path>
+			<move x="84" y="0"/>
+			<arc rx="18" ry="10" x-axis-rotation="0" large-arc-flag="0" sweep-flag="1" x="79" y="9"/>
+			<line x="98" y="14"/>
+		</path>
+	<stroke/>
+</foreground>
+</shape>
+</shapes>

@@ -97,8 +97,10 @@ Sidebar.prototype.init = function()
 
 	this.addStencilPalette('flow', 'Flow', dir + '/flow.xml',
 		';whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=2');
-//	this.addStencilPalette('flowchart', 'Flowchart', dir + '/flowchart.xml',
-//	';whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=2');
+	this.addStencilPalette('flowchart', 'Flowchart', dir + '/flowchart.xml',
+	';whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=2');
+	this.addStencilPalette('defultflow', 'DefultFlow', dir + '/defultflow.xml',
+			';whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=2');
 	
 //	this.addImagePalette('clipart', mxResources.get('clipart'), dir + '/clipart/', '_128x128.png',
 //		['Earth_globe', 'Empty_Folder', 'Full_Folder', 'Gear', 'Lock', 'Software', 'Virus', 'Email',

@@ -1,27 +1,27 @@
 <shapes name="Flow">
 <shape name="Node" h="98" w="98" aspect="variable" strokewidth="inherit">
 <connections>
-<constraint x="0" y="0.5" perimeter="0" name="W"/>
-<constraint x="1" y="0.5" perimeter="0" name="E"/>
+	<constraint x="0" y="0.5" perimeter="0" name="W"/>
+	<constraint x="1" y="0.5" perimeter="0" name="E"/>
 </connections>
 <background>
-<path>
-<move x="98" y="14"/>
-<line x="98" y="98"/>
-<line x="0" y="98"/>
-<line x="0" y="0"/>
-<line x="84" y="0"/>
-<close/>
-</path>
+	<path>
+		<move x="98" y="14"/>
+			<line x="98" y="98"/>
+			<line x="0" y="98"/>
+			<line x="0" y="0"/>
+			<line x="84" y="0"/>
+		<close/>
+	</path>
 </background>
 <foreground>
-<fillstroke/>
-<path>
-<move x="84" y="0"/>
-<arc rx="18" ry="10" x-axis-rotation="0" large-arc-flag="0" sweep-flag="1" x="79" y="9"/>
-<line x="98" y="14"/>
-</path>
-<stroke/>
+	<fillstroke/>
+		<path>
+			<move x="84" y="0"/>
+			<arc rx="18" ry="10" x-axis-rotation="0" large-arc-flag="0" sweep-flag="1" x="79" y="9"/>
+			<line x="98" y="14"/>
+		</path>
+	<stroke/>
 </foreground>
 </shape>
 </shapes>

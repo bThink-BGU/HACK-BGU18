@@ -9,3 +9,13 @@ buildNumber.properties
 .mvn/timing.properties
 .DS_Store
 
+#eclipse
+.metadata
+.metadata.new
+.pydevproject
+.recommenders
+.project
+.settings
+.classpath
+.idea
+

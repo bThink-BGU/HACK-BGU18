@@ -42,41 +42,29 @@ var BSyncForm = function(editorUi,cell)
 
 	};
 
-	mxUtils.write(td, "Request:");
-	var linkInput = document.createElement('input');
-	linkInput.setAttribute('type', 'text');
-	linkInput.style.marginTop = '6px';
-	linkInput.style.width = '400px';
-	linkInput.style.backgroundRepeat = 'no-repeat';
-	linkInput.style.backgroundPosition = '100% 50%';
-	linkInput.style.paddingRight = '14px';
-	td.appendChild(linkInput);
-	row.appendChild(td);
+	var linkInput = {};
 	
-	tbody.appendChild(row);
-	mxUtils.write(td, "Wait:");
-	var linkInput2 = document.createElement('input');
-	linkInput2.setAttribute('type', 'text');
-	linkInput2.style.marginTop = '6px';
-	linkInput2.style.width = '400px';
-
-	linkInput2.style.backgroundRepeat = 'no-repeat';
-	linkInput2.style.backgroundPosition = '100% 50%';
-	linkInput2.style.paddingRight = '14px';
-	td.appendChild(linkInput2);
-	row.appendChild(td);
-	tbody.appendChild(row);
-	mxUtils.write(td, "Block:");
-	var linkInput3 = document.createElement('input');
-	linkInput3.setAttribute('type', 'text');
-	linkInput3.style.marginTop = '6px';
-	linkInput3.style.width = '400px';
-	linkInput3.style.backgroundRepeat = 'no-repeat';
-	linkInput3.style.backgroundPosition = '100% 50%';
-	linkInput3.style.paddingRight = '14px';
-	td.appendChild(linkInput3);
-	row.appendChild(td);
-	tbody.appendChild(row);
+	addSec = function(lbl) {
+		mxUtils.write(td, lbl);
+		linkInput[lbl] = document.createElement('input');
+		linkInput[lbl].setAttribute('type', 'text');
+		linkInput[lbl].style.marginTop = '6px';
+		linkInput[lbl].style.width = '400px';
+		linkInput[lbl].style.backgroundRepeat = 'no-repeat';
+		linkInput[lbl].style.backgroundPosition = '100% 50%';
+		linkInput[lbl].style.paddingRight = '14px';
+		td.appendChild(linkInput[lbl]);
+		row.appendChild(td);
+	
+		tbody.appendChild(row);
+		
+		if(value.getAttribute(lbl) != undefined)
+			linkInput[lbl].value = value.getAttribute(lbl);
+	}
+	
+	addSec("Request:");
+	addSec("Wait:");
+	addSec("Block:");
 	
 
 	row = document.createElement('tr');
@@ -101,9 +89,22 @@ var BSyncForm = function(editorUi,cell)
 	{
 		var genericBtn = mxUtils.button(mxResources.get('apply'), function()
 		{
-			editorUi.hideDialog();
-			value.setAttribute("code", "");
+			var code = "bp.sync({";
+			code += "request,:" + linkInput["Request:"].value;
+			code += ",waitFor:" + linkInput["Wait:"].value;
+			code += ",block:" + linkInput["Block:"].value;
+
+			code += "});";
+			
+			value.setAttribute("code", code);
+			value.setAttribute("Request:", linkInput["Request:"].value);
+			value.setAttribute("Wait:", linkInput["Wait:"].value);
+			value.setAttribute("Block:", linkInput["Block:"].value);
 			graph.getModel().setValue(cell, value);
+			
+			editorUi.hideDialog();
+			
+			
 		});
 		
 		genericBtn.className = 'geBtn gePrimaryBtn';	

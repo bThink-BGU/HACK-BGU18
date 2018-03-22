@@ -33,7 +33,8 @@ public class BPServer {
 		//context.addServlet(new ServletHolder(new ExportServlet()), "/export");
 		context.addServlet(new ServletHolder(new FlowOpenServlet()), "/open");
 		context.addServlet(new ServletHolder(new RunServlet()), "/run");
-		context.addServlet(new ServletHolder(new DashboardServlet()), "/dashboard");
+		context.addServlet(new ServletHolder(new DashboardServlet()), "/dashboard/users/*");
+		context.addServlet(new ServletHolder(new DashboardServlet()), "/dashboard/courses/*");
 
 		ResourceHandler fileHandler = new ResourceHandler();
 		fileHandler.setResourceBase(".");

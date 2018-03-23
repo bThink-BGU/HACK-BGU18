@@ -90,7 +90,7 @@ var BSyncForm = function(editorUi,cell)
 		var genericBtn = mxUtils.button(mxResources.get('apply'), function()
 		{
 			var code = "bp.sync({";
-			code += "request,:" + linkInput["Request:"].value;
+			code += "request:" + linkInput["Request:"].value;
 			code += ",waitFor:" + linkInput["Wait:"].value;
 			code += ",block:" + linkInput["Block:"].value;
 

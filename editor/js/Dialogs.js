@@ -125,6 +125,131 @@ var BSyncForm = function(editorUi,cell)
 	
 };
 
+var CounterForm = function(editorUi,cell)
+{
+	
+	var graph = editorUi.editor.graph;
+	var value = graph.getModel().getValue(cell);
+	
+	// Converts the value to an XML node
+	if (!mxUtils.isNode(value))
+	{
+		var doc = mxUtils.createXmlDocument();
+		var obj = doc.createElement('object');
+		obj.setAttribute('label', value || '');
+		value = obj;
+	}
+
+	
+	w = 800;
+	h = 350;
+	noHide = true;
+	var row, td;
+	
+	var table = document.createElement('table');
+	var tbody = document.createElement('tbody');
+	
+	row = document.createElement('tr');
+	
+	td = document.createElement('td');
+	td.style.fontSize = '10pt';
+	td.style.width = '100px';
+	mxUtils.writeln(tbody, "CounterForm");
+	mxUtils.writeln(tbody, "");
+
+	
+	row.appendChild(td);
+	tbody.appendChild(row);
+
+	this.init = function()
+	{
+
+	};
+
+	var linkInput = {};
+	
+	addSec = function(lbl) {
+		mxUtils.write(td, lbl);
+		linkInput[lbl] = document.createElement('input');
+		linkInput[lbl].setAttribute('type', 'text');
+		linkInput[lbl].style.marginTop = '6px';
+		linkInput[lbl].style.width = '400px';
+		linkInput[lbl].style.backgroundRepeat = 'no-repeat';
+		linkInput[lbl].style.backgroundPosition = '100% 50%';
+		linkInput[lbl].style.paddingRight = '14px';
+		td.appendChild(linkInput[lbl]);
+		row.appendChild(td);
+	
+		tbody.appendChild(row);
+		
+		if(value.getAttribute(lbl) != undefined)
+			linkInput[lbl].value = value.getAttribute(lbl);
+	}
+	
+	addSec("Repeat for N times:");
+
+	
+
+	row = document.createElement('tr');
+	td = document.createElement('td');
+	td.style.paddingTop = '14px';
+	td.style.whiteSpace = 'nowrap';
+	td.setAttribute('align', 'right');
+//	
+	var cancelBtn = mxUtils.button(mxResources.get('cancel'), function()
+	{
+		editorUi.hideDialog();
+	});
+	cancelBtn.className = 'geBtn';
+//	
+	if (editorUi.editor.cancelFirst)
+	{
+		td.appendChild(cancelBtn);
+	}
+
+	
+
+	{
+		var genericBtn = mxUtils.button(mxResources.get('apply'), function()
+		{
+			var code = "if( ctx.n==undefined )  {" +
+					"ctx.n = " + linkInput["Repeat for N times:"].value + ";";
+			code += "ctx.forward = {'not last':ctx};" +
+					"} else {" +
+					"if( ctx.n==0){" +
+					"ctx.forward = {'last': {e:'DONE'}};" +
+					"}else{" +
+					"ctx.forward = {'not last': ctx};" +
+					"ctx.n--;" +
+					"}" +
+					"} ";
+			
+			value.setAttribute("code", code);
+		//	value.setAttribute("Repeat for N times:", linkInput["Repeat for N times:"].value);
+			graph.getModel().setValue(cell, value);
+			
+			editorUi.hideDialog();
+			
+			
+		});
+		
+		genericBtn.className = 'geBtn gePrimaryBtn';	
+		td.appendChild(genericBtn);
+	}
+	
+	if (!editorUi.editor.cancelFirst)
+	{
+		td.appendChild(genericBtn);
+	}
+
+	row.appendChild(td);
+	tbody.appendChild(row);
+	table.appendChild(tbody);
+	this.container = table;
+	
+
+	
+};
 
 
 

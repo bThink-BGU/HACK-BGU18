@@ -1060,7 +1060,9 @@ Menus.prototype.createPopupMenu = function(menu, cell, evt)
 				if(graph.getSelectionCell().style.includes("flow.bsync") ) {
 					this.addMenuItems(menu, ['editBsync'], null, evt);					
 				}
-				
+				if(graph.getSelectionCell().style.includes("flow.counter") ) {
+					this.addMenuItems(menu, ['editCounter'], null, evt);					
+				}
 				
 				// Shows edit image action if there is an image in the style
 				if (graph.getModel().isVertex(cell) && mxUtils.getValue(state.style, mxConstants.STYLE_IMAGE, null) != null)

@@ -489,7 +489,7 @@ var MoodleForm = function(editorUi,cell)
 		var genericBtn = mxUtils.button(mxResources.get('apply'), function()
 		{
 			var code = "bp.sync({";
-			code += "waitFor: bp.Event (" + positionSelect.value +")" ;
+			code += "waitFor: " + positionSelect.value;
 			code += "});";
 			
 			value.setAttribute("code", code);

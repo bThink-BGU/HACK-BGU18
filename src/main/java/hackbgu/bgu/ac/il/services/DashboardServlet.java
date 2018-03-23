@@ -1,31 +1,16 @@
 package hackbgu.bgu.ac.il.services;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.concurrent.Callable;
 
 import javax.servlet.ServletException;
-import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jetty.util.log.Log;
 import org.eclipse.jetty.util.log.Logger;
-import org.w3c.dom.Document;
-
-import com.mxgraph.io.mxCodec;
-import com.mxgraph.model.mxCell;
-import com.mxgraph.model.mxGraphModel;
-import com.mxgraph.model.mxGraphModel.Filter;
-import com.mxgraph.util.mxXmlUtils;
-
-import il.ac.bgu.cs.bp.bpjs.execution.BProgramRunner;
-import il.ac.bgu.cs.bp.bpjs.execution.listeners.PrintBProgramRunnerListener;
-import il.ac.bgu.cs.bp.bpjs.model.SingleResourceBProgram;
 
 public class DashboardServlet extends HttpServlet {
 	private static final Logger LOG = Log.getLogger(DashboardServlet.class);
@@ -39,7 +24,6 @@ public class DashboardServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
 		String requestURI = request.getRequestURI().substring(StringUtils.indexOf(request.getRequestURI(),"/")+1);
 		String responseContent = handleRequest(requestURI);
 		

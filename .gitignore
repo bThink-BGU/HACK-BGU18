@@ -22,3 +22,4 @@ buildNumber.properties
 .classpath
 
 .settings/org.eclipse.jdt.core.prefs
+*.log

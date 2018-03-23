@@ -7,4 +7,5 @@ public interface MoodleService {
 	String getUser(String username) throws Exception;
 	String getCourse(String courseId) throws Exception;
 	String getAllUsers() throws IOException;
+	String getUserWithAssignments(String username) throws Exception;
 }

@@ -25,6 +25,7 @@ public class MoodleRestClient {
 	public String sendRest(String func) throws IOException{
 		// Send request
         String serverurl = DomainName + "/webservice/rest/server.php" + "?wstoken=" + Token + "&moodlewsrestformat=json&wsfunction=" + func;
+        System.out.println(serverurl);
         HttpURLConnection con = (HttpURLConnection) new URL(serverurl).openConnection();
         con.setRequestMethod("POST");
         con.setRequestProperty("Content-Type",

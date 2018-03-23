@@ -36,12 +36,12 @@ export class DashboardComponent implements OnInit {
             {
                 id: 1,
                 type: 'success',
-                message: `ציונך בקורס "מבוא לשקר כלשהו" הוא 56`
+                message: `ציונך בקורס "מבוא להנדסת תוכנה" הוא 85`
             },
             {
                 id: 2,
                 type: 'warning',
-                message: `פורסם תרגיל הגשה נוסף בקורס "האק בי ג'י יו"`
+                message: `פורסם תרגיל הגשה נוסף בקורס "אלגברה לינראית"`
             }
         );
     }

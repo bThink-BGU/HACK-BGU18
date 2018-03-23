@@ -19,3 +19,6 @@ buildNumber.properties
 .classpath
 .idea
 
+.classpath
+
+.settings/org.eclipse.jdt.core.prefs

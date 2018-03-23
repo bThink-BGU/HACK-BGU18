@@ -1,0 +1,48 @@
+<div [@routerTransition]>
+    <app-page-header [heading]="'Courses'" [icon]="'fa-bar-chart-o'"></app-page-header>
+    <div class="row">
+	    <!--<div>{{(obj | async)?.fruit}}</div>-->
+	    <div class="card mb-3">
+	        <div class="card-header">רשימת הקורסים לסמסטר</div>
+	        <table class="card-body table table-hover">
+	            <thead>
+	            <tr>
+	                <th>שם הקורס</th>
+	                <th>מספר קורס</th>
+	                <th>נק"ז</th>
+	            </tr>
+	            </thead>
+	            <tbody>
+	            <tr *ngFor="let course of courses | async" (mouseover)="onMouseOver($event)" (mouseleave)="onMouseLeave()">
+	            	<th scope="row"></th>
+	                <td>{{course.name}}</td>
+	                <td>{{course.id}}</td>
+	                <td>{{course.nakaz}}</td>
+	            </tr>
+	            </tbody>
+	        </table>
+	    </div>
+    </div>
+    <div class="row" *ngIf="hoveredCourse">
+	    <div class="card-header">סגל הקורס</div>
+            <div class="card-body table-responsive">
+                <table class="table">
+                    <thead>
+                <tr>
+                    <th>תפקיד</th>                	
+                    <th>שם פרטי</th>
+                    <th>שם משפחה</th>
+                    <th>שעות קבלה</th>
+                </tr>
+                </thead>
+                   <tbody>
+                <tr *ngFor="let user of users | async">
+                       <th scope="row"></th>
+                       <td>מרצה</td>
+                        <td>{{user.first_name}}</td>
+                    </tr>
+               </tbody>
+                </table>
+            </div>
+        </div>
+</div>

@@ -456,27 +456,13 @@ var MoodleForm = function(editorUi,cell)
 	
 	// Adds label position options
 	var positionSelect = document.createElement('select');
-//	positionSelect.style.position = 'absolute';
-//	positionSelect.style.right = '20px';
-//	positionSelect.style.width = '97px';
-//	positionSelect.style.marginTop = '-2px';
-	
-	var directions = ['topLeft', 'top', 'topRight', 'left', 'center', 'right', 'bottomLeft', 'bottom', 'bottomRight'];
-	var lset = {'topLeft': [mxConstants.ALIGN_LEFT, mxConstants.ALIGN_TOP, mxConstants.ALIGN_RIGHT, mxConstants.ALIGN_BOTTOM],
-			'top': [mxConstants.ALIGN_CENTER, mxConstants.ALIGN_TOP, mxConstants.ALIGN_CENTER, mxConstants.ALIGN_BOTTOM],
-			'topRight': [mxConstants.ALIGN_RIGHT, mxConstants.ALIGN_TOP, mxConstants.ALIGN_LEFT, mxConstants.ALIGN_BOTTOM],
-			'left': [mxConstants.ALIGN_LEFT, mxConstants.ALIGN_MIDDLE, mxConstants.ALIGN_RIGHT, mxConstants.ALIGN_MIDDLE],
-			'center': [mxConstants.ALIGN_CENTER, mxConstants.ALIGN_MIDDLE, mxConstants.ALIGN_CENTER, mxConstants.ALIGN_MIDDLE],
-			'right': [mxConstants.ALIGN_RIGHT, mxConstants.ALIGN_MIDDLE, mxConstants.ALIGN_LEFT, mxConstants.ALIGN_MIDDLE],
-			'bottomLeft': [mxConstants.ALIGN_LEFT, mxConstants.ALIGN_BOTTOM, mxConstants.ALIGN_RIGHT, mxConstants.ALIGN_TOP],
-			'bottom': [mxConstants.ALIGN_CENTER, mxConstants.ALIGN_BOTTOM, mxConstants.ALIGN_CENTER, mxConstants.ALIGN_TOP],
-			'bottomRight': [mxConstants.ALIGN_RIGHT, mxConstants.ALIGN_BOTTOM, mxConstants.ALIGN_LEFT, mxConstants.ALIGN_TOP]};
+	var directions = ['SubmissionAddedAll()', 'SubmissionAdded(owGR0jSCXX3Jv05RciE6)'];
 
 	for (var i = 0; i < directions.length; i++)
 	{
 		var positionOption = document.createElement('option');
 		positionOption.setAttribute('value', directions[i]);
-		mxUtils.write(positionOption, mxResources.get(directions[i]));
+		mxUtils.write(positionOption, directions[i]);
 		positionSelect.appendChild(positionOption);
 	}
 
@@ -503,12 +489,12 @@ var MoodleForm = function(editorUi,cell)
 		var genericBtn = mxUtils.button(mxResources.get('apply'), function()
 		{
 			var code = "bp.sync({";
-			code += "waitFor: bp.Event" ;
+			code += "waitFor: bp.Event (" + positionSelect.value +")" ;
 			code += "});";
 			
 			value.setAttribute("code", code);
 		//	value.setAttribute("Wait:", linkInput["Wait:"].value);
-			//graph.getModel().setValue(cell, value);
+			graph.getModel().setValue(cell, value);
 			
 			editorUi.hideDialog();
 			

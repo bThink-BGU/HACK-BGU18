@@ -85,29 +85,35 @@ Sidebar.prototype.init = function()
 	var dir = STENCIL_PATH;
 	
 	this.addSearchPalette(true);
-	//this.addGeneralPalette(true);
-	//this.addMiscPalette(false);
-//	this.addAdvancedPalette(false);
+	// this.addGeneralPalette(true);
+	// this.addMiscPalette(false);
+// this.addAdvancedPalette(false);
 	
-//	this.addBasicPalette(dir);
-	//	this.addStencilPalette('arrows', mxResources.get('arrows'), dir + '/arrows.xml',
-	//		';whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=2');
-	//this.addUmlPalette(false);
-//	this.addBpmnPalette(dir, false);
+// this.addBasicPalette(dir);
+	// this.addStencilPalette('arrows', mxResources.get('arrows'), dir +
+	// '/arrows.xml',
+	// ';whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=2');
+	// this.addUmlPalette(false);
+// this.addBpmnPalette(dir, false);
 
 	this.addStencilPalette('flow', 'Flow', dir + '/flow.xml',
 		';whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=2');
-//	this.addStencilPalette('flowchart', 'Flowchart', dir + '/flowchart.xml',
-//	';whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=2');
+	this.addStencilPalette('flowchart', 'Flowchart', dir + '/flowchart.xml',
+	';whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=2');
 	
-//	this.addImagePalette('clipart', mxResources.get('clipart'), dir + '/clipart/', '_128x128.png',
-//		['Earth_globe', 'Empty_Folder', 'Full_Folder', 'Gear', 'Lock', 'Software', 'Virus', 'Email',
-//		 'Database', 'Router_Icon', 'iPad', 'iMac', 'Laptop', 'MacBook', 'Monitor_Tower', 'Printer',
-//		 'Server_Tower', 'Workstation', 'Firewall_02', 'Wireless_Router_N', 'Credit_Card',
-//		 'Piggy_Bank', 'Graph', 'Safe', 'Shopping_Cart', 'Suit1', 'Suit2', 'Suit3', 'Pilot1',
-//		 'Worker1', 'Soldier1', 'Doctor1', 'Tech1', 'Security1', 'Telesales1'], null,
-//		 {'Wireless_Router_N': 'wireless router switch wap wifi access point wlan',
-//		  'Router_Icon': 'router switch'});
+// this.addImagePalette('clipart', mxResources.get('clipart'), dir +
+// '/clipart/', '_128x128.png',
+// ['Earth_globe', 'Empty_Folder', 'Full_Folder', 'Gear', 'Lock', 'Software',
+// 'Virus', 'Email',
+// 'Database', 'Router_Icon', 'iPad', 'iMac', 'Laptop', 'MacBook',
+// 'Monitor_Tower', 'Printer',
+// 'Server_Tower', 'Workstation', 'Firewall_02', 'Wireless_Router_N',
+// 'Credit_Card',
+// 'Piggy_Bank', 'Graph', 'Safe', 'Shopping_Cart', 'Suit1', 'Suit2', 'Suit3',
+// 'Pilot1',
+// 'Worker1', 'Soldier1', 'Doctor1', 'Tech1', 'Security1', 'Telesales1'], null,
+// {'Wireless_Router_N': 'wireless router switch wap wifi access point wlan',
+// 'Router_Icon': 'router switch'});
 };
 
 /**
@@ -207,8 +213,8 @@ Sidebar.prototype.maxTooltipHeight = 400;
 
 /**
  * Specifies if stencil files should be loaded and added to the search index
- * when stencil palettes are added. If this is false then the stencil files
- * are lazy-loaded when the palette is shown.
+ * when stencil palettes are added. If this is false then the stencil files are
+ * lazy-loaded when the palette is shown.
  */
 Sidebar.prototype.addStencilsToIndex = true;
 
@@ -325,7 +331,8 @@ Sidebar.prototype.showTooltip = function(elt, cells, w, h, title, showLabel)
 						this.tooltipTitle.style.textAlign = 'center';
 						this.tooltipTitle.style.width = '100%';
 						
-						// Oversize titles are cut-off currently. Should make tooltip wider later.
+						// Oversize titles are cut-off currently. Should make
+						// tooltip wider later.
 						this.tooltipTitle.style.overflow = 'hidden';
 						
 						if (mxClient.IS_SVG)
@@ -375,7 +382,7 @@ Sidebar.prototype.showTooltip = function(elt, cells, w, h, title, showLabel)
 				var off = this.getTooltipOffset();
 				var bottom = Math.max(b.clientHeight || 0, d.clientHeight);
 				var left = this.container.clientWidth + this.editorUi.splitSize + 3 + this.editorUi.container.offsetLeft + off.x;
-				var top = Math.min(bottom - height - 20 /*status bar*/, Math.max(0, (this.editorUi.container.offsetTop +
+				var top = Math.min(bottom - height - 20 /* status bar */, Math.max(0, (this.editorUi.container.offsetTop +
 					this.container.offsetTop + elt.offsetTop - this.container.scrollTop - height / 2 + 16))) + off.y;
 
 				if (mxClient.IS_SVG)
@@ -931,7 +938,8 @@ Sidebar.prototype.addGeneralPalette = function(expand)
 	var fns = [
 	 	this.createVertexTemplateEntry('rounded=0;whiteSpace=wrap;html=1;', 120, 60, '', 'Rectangle', null, null, 'rect rectangle box'),
 	 	this.createVertexTemplateEntry('rounded=1;whiteSpace=wrap;html=1;', 120, 60, '', 'Rounded Rectangle', null, null, 'rounded rect rectangle box'),
-	 	// Explicit strokecolor/fillcolor=none is a workaround to maintain transparent background regardless of current style
+	 	// Explicit strokecolor/fillcolor=none is a workaround to maintain
+		// transparent background regardless of current style
 	 	this.createVertexTemplateEntry('text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;',
  			40, 20, 'Text', 'Text', null, null, 'text textbox textarea label'),
 	 	this.createVertexTemplateEntry('text;html=1;strokeColor=none;fillColor=none;spacing=5;spacingTop=-20;whiteSpace=wrap;overflow=hidden;rounded=0;', 190, 120,
@@ -1806,7 +1814,8 @@ Sidebar.prototype.createThumb = function(cells, width, height, parent, title, sh
 			Math.floor((height - bounds.height * s) / 2 / s - bounds.y));
 	var node = null;
 	
-	// For supporting HTML labels in IE9 standards mode the container is cloned instead
+	// For supporting HTML labels in IE9 standards mode the container is cloned
+	// instead
 	if (this.graph.dialect == mxConstants.DIALECT_SVG && !mxClient.NO_FO)
 	{
 		node = this.graph.view.getCanvas().ownerSVGElement.cloneNode(true);
@@ -1976,7 +1985,8 @@ Sidebar.prototype.updateShapes = function(source, targets)
 
 				if (style != null)
 				{
-					// Replaces the participant style in the lifeline shape with the target shape
+					// Replaces the participant style in the lifeline shape with
+					// the target shape
 					if (style[mxConstants.STYLE_SHAPE] == 'umlLifeline' &&
 						sourceCellStyle[mxConstants.STYLE_SHAPE] != 'umlLifeline')
 					{
@@ -2130,7 +2140,8 @@ Sidebar.prototype.dropAndConnect = function(source, targets, direction, dropCell
 			var sourceGeo = graph.getCellGeometry(source);
 			var geo2 = graph.getCellGeometry(targets[dropCellIndex]);
 
-			// Handles special case where target should be ignored for stack layouts
+			// Handles special case where target should be ignored for stack
+			// layouts
 			var targetParent = graph.model.getParent(source);
 			var validLayout = true;
 			
@@ -2732,9 +2743,11 @@ Sidebar.prototype.createDragSource = function(elt, dropHandler, preview, cells, 
 			timeOnTarget = new Date().getTime() - startTime;
 		}
 
-		// Shift means disabled, delayed on cells with children, shows after this.dropTargetDelay, hides after 2500ms
+		// Shift means disabled, delayed on cells with children, shows after
+		// this.dropTargetDelay, hides after 2500ms
 		if (timeOnTarget < 2500 && state != null && !mxEvent.isShiftDown(evt) &&
-			// If shape is equal or target has no stroke then add long delay except for images
+			// If shape is equal or target has no stroke then add long delay
+			// except for images
 			(((mxUtils.getValue(state.style, mxConstants.STYLE_SHAPE) != mxUtils.getValue(sourceCellStyle, mxConstants.STYLE_SHAPE) &&
 			mxUtils.getValue(state.style, mxConstants.STYLE_STROKECOLOR, mxConstants.NONE) != mxConstants.NONE) ||
 			mxUtils.getValue(sourceCellStyle, mxConstants.STYLE_SHAPE) == 'image') ||
@@ -2880,7 +2893,8 @@ Sidebar.prototype.createDragSource = function(elt, dropHandler, preview, cells, 
 			((graph.model.isEdge(cell) && firstVertex != null) ||
 			(graph.model.isVertex(cell) && graph.isCellConnectable(cell)));
 		
-		// Drop arrows shown after this.dropTargetDelay, hidden after 5 secs, switches arrows after 500ms
+		// Drop arrows shown after this.dropTargetDelay, hidden after 5 secs,
+		// switches arrows after 500ms
 		if ((currentTargetState != null && timeOnTarget >= 5000) ||
 			(currentTargetState != state &&
 			(bbox == null || !mxUtils.contains(bbox, x, y) ||
@@ -3201,8 +3215,11 @@ Sidebar.prototype.createVertexTemplateFromData = function(data, width, height, t
  */
 Sidebar.prototype.createVertexTemplateFromCells = function(cells, width, height, title, showLabel, showTitle, allowCellsInserted)
 {
-	// Use this line to convert calls to this function with lots of boilerplate code for creating cells
-	//console.trace('xml', this.graph.compress(mxUtils.getXml(this.graph.encodeCells(cells))), cells);
+	// Use this line to convert calls to this function with lots of boilerplate
+	// code for creating cells
+	// console.trace('xml',
+	// this.graph.compress(mxUtils.getXml(this.graph.encodeCells(cells))),
+	// cells);
 	return this.createItem(cells, title, showLabel, showTitle, width, height, allowCellsInserted);
 };
 
@@ -3412,7 +3429,8 @@ Sidebar.prototype.addImagePalette = function(id, title, prefix, postfix, items, 
 };
 
 /**
- * Creates the array of tags for the given stencil. Duplicates are allowed and will be filtered out later.
+ * Creates the array of tags for the given stencil. Duplicates are allowed and
+ * will be filtered out later.
  */
 Sidebar.prototype.getTagsForStencil = function(packageName, stencilName, moreTags)
 {

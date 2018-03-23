@@ -83,7 +83,6 @@ Actions.prototype.init = function() {
 		xhr.onreadystatechange = function(e) {
 			if (xhr.readyState == 4 && xhr.status == 200) {
 				mxUtils.alert('Your model is successfully deployed');
-				console.log(xhr.responseText);  
 			}
 		};
 
@@ -99,7 +98,38 @@ Actions.prototype.init = function() {
 		}
 	});
 
-	
+	this.addAction('editBsync', function() {
+		var cell = graph.getSelectionCell() || graph.getModel().getRoot();
+
+		if (cell != null) {
+  			var dlg = new BSyncForm(ui, cell);
+			ui.showDialog(dlg.container, 520, 420, true, true);
+			dlg.init();
+		}
+	});
+
+
+	this.addAction('editCounter', function() {
+		var cell = graph.getSelectionCell() || graph.getModel().getRoot();
+
+		if (cell != null) {
+  			var dlg = new CounterForm(ui, cell);
+			ui.showDialog(dlg.container, 520, 420, true, true);
+			dlg.init();
+		}
+	});
+
+
+	this.addAction('editMoodle', function() {
+		var cell = graph.getSelectionCell() || graph.getModel().getRoot();
+
+		if (cell != null) {
+  			var dlg = new MoodleForm(ui, cell);
+			ui.showDialog(dlg.container, 520, 420, true, true);
+			dlg.init();
+		}
+	});
+
 
 	this.addAction('pageSetup...', function() {
 		ui.showDialog(new PageSetupDialog(ui).container, 320, 220, true, true);

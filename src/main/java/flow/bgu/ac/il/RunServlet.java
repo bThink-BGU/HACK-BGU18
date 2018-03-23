@@ -38,14 +38,14 @@ public class RunServlet extends HttpServlet {
 	public static BProgramRunner rnr;
 
 	private static Thread thread;
-
+	
 	/**
 	 * Handles save request and prints XML.
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		// Extractt the XML fro the message
+		// Extract the XML fro the message
 		BufferedReader br = request.getReader();
 		mxCodec codec = new mxCodec();
 		String xml = IOUtils.toString(br);
@@ -82,7 +82,7 @@ public class RunServlet extends HttpServlet {
 			thread.interrupt();
 
 		// Start a new deployment
-		bprog = new SingleResourceBProgram("rungraph.js");
+		bprog = new SingleResourceBProgram("rungraph.js");	
 		bprog.putInGlobalScope("model", model);
 		bprog.appendSource(functions);
 		bprog.setDaemonMode(true);

@@ -317,3 +317,4 @@ runModel=Deploy
 editCode=Edit Code
 editBsync=Edit BSync
 editCounter=Edit Counter
+editMoodle=Edit Moodle

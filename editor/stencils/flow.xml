@@ -76,4 +76,22 @@
 			<fillstroke />
 		</foreground>
 	</shape>
+		<shape name="Moodle" h="25" w="100" aspect="variable" strokewidth="inherit">
+		<connections>
+			<constraint x="0" y="0.5" perimeter="0" name="W" />
+			<constraint x="1" y="0.5" perimeter="0" name="E" />
+		</connections>
+		<background>
+			<path>
+				<move x="0" y="0" />
+				<line x="100" y="0" />
+				<line x="100" y="25" />
+				<line x="0" y="25" />
+				<close />
+			</path>
+		</background>
+		<foreground>
+			<fillstroke />
+		</foreground>
+	</shape>
 </shapes>

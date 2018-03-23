@@ -384,7 +384,158 @@ var CodeEditorDialog = function(editorUi,cell)
 	
 };
 
+var MoodleForm = function(editorUi,cell)
+{
+	
+	var graph = editorUi.editor.graph;
+	var value = graph.getModel().getValue(cell);
+	
+	// Converts the value to an XML node
+	if (!mxUtils.isNode(value))
+	{
+		var doc = mxUtils.createXmlDocument();
+		var obj = doc.createElement('object');
+		obj.setAttribute('label', value || '');
+		value = obj;
+	}
 
+	
+	w = 800;
+	h = 350;
+	noHide = true;
+	var row, td;
+	
+	var table = document.createElement('table');
+	var tbody = document.createElement('tbody');
+	
+	row = document.createElement('tr');
+	
+	td = document.createElement('td');
+	td.style.fontSize = '10pt';
+	td.style.width = '100px';
+	mxUtils.writeln(tbody, "Moodle Listener");
+	mxUtils.writeln(tbody, "");
+
+	
+	row.appendChild(td);
+	tbody.appendChild(row);
+
+	this.init = function()
+	{
+
+	};
+
+	var linkInput = {};
+	
+	addSec = function(lbl) {
+		//mxUtils.write(td, lbl);
+		linkInput[lbl] = document.createElement('input');
+		linkInput[lbl].setAttribute('type', 'text');
+		linkInput[lbl].style.marginTop = '6px';
+		linkInput[lbl].style.width = '400px';
+		linkInput[lbl].style.backgroundRepeat = 'no-repeat';
+		linkInput[lbl].style.backgroundPosition = '100% 50%';
+		linkInput[lbl].style.paddingRight = '14px';
+		td.appendChild(linkInput[lbl]);
+		row.appendChild(td);
+	
+		tbody.appendChild(row);
+		
+		if(value.getAttribute(lbl) != undefined)
+			linkInput[lbl].value = value.getAttribute(lbl);
+	}
+	mxUtils.write(td, "Listen to:");
+	//addSec("Wait:");
+	
+//
+	row = document.createElement('tr');
+	td = document.createElement('td');
+	td.style.paddingTop = '14px';
+	td.style.whiteSpace = 'nowrap';
+	td.setAttribute('align', 'right');
+	
+	// Adds label position options
+	var positionSelect = document.createElement('select');
+//	positionSelect.style.position = 'absolute';
+//	positionSelect.style.right = '20px';
+//	positionSelect.style.width = '97px';
+//	positionSelect.style.marginTop = '-2px';
+	
+	var directions = ['topLeft', 'top', 'topRight', 'left', 'center', 'right', 'bottomLeft', 'bottom', 'bottomRight'];
+	var lset = {'topLeft': [mxConstants.ALIGN_LEFT, mxConstants.ALIGN_TOP, mxConstants.ALIGN_RIGHT, mxConstants.ALIGN_BOTTOM],
+			'top': [mxConstants.ALIGN_CENTER, mxConstants.ALIGN_TOP, mxConstants.ALIGN_CENTER, mxConstants.ALIGN_BOTTOM],
+			'topRight': [mxConstants.ALIGN_RIGHT, mxConstants.ALIGN_TOP, mxConstants.ALIGN_LEFT, mxConstants.ALIGN_BOTTOM],
+			'left': [mxConstants.ALIGN_LEFT, mxConstants.ALIGN_MIDDLE, mxConstants.ALIGN_RIGHT, mxConstants.ALIGN_MIDDLE],
+			'center': [mxConstants.ALIGN_CENTER, mxConstants.ALIGN_MIDDLE, mxConstants.ALIGN_CENTER, mxConstants.ALIGN_MIDDLE],
+			'right': [mxConstants.ALIGN_RIGHT, mxConstants.ALIGN_MIDDLE, mxConstants.ALIGN_LEFT, mxConstants.ALIGN_MIDDLE],
+			'bottomLeft': [mxConstants.ALIGN_LEFT, mxConstants.ALIGN_BOTTOM, mxConstants.ALIGN_RIGHT, mxConstants.ALIGN_TOP],
+			'bottom': [mxConstants.ALIGN_CENTER, mxConstants.ALIGN_BOTTOM, mxConstants.ALIGN_CENTER, mxConstants.ALIGN_TOP],
+			'bottomRight': [mxConstants.ALIGN_RIGHT, mxConstants.ALIGN_BOTTOM, mxConstants.ALIGN_LEFT, mxConstants.ALIGN_TOP]};
+
+	for (var i = 0; i < directions.length; i++)
+	{
+		var positionOption = document.createElement('option');
+		positionOption.setAttribute('value', directions[i]);
+		mxUtils.write(positionOption, mxResources.get(directions[i]));
+		positionSelect.appendChild(positionOption);
+	}
+
+	td.appendChild(positionSelect);
+
+	
+
+	row.appendChild(td);
+//	
+	var cancelBtn = mxUtils.button(mxResources.get('cancel'), function()
+	{
+		editorUi.hideDialog();
+	});
+	cancelBtn.className = 'geBtn';
+//	
+	if (editorUi.editor.cancelFirst)
+	{
+		td.appendChild(cancelBtn);
+	}
+
+	
+
+	{
+		var genericBtn = mxUtils.button(mxResources.get('apply'), function()
+		{
+			var code = "bp.sync({";
+			code += "waitFor: bp.Event" ;
+			code += "});";
+			
+			value.setAttribute("code", code);
+		//	value.setAttribute("Wait:", linkInput["Wait:"].value);
+			//graph.getModel().setValue(cell, value);
+			
+			editorUi.hideDialog();
+			
+			
+		});
+		
+		genericBtn.className = 'geBtn gePrimaryBtn';	
+		td.appendChild(genericBtn);
+	}
+	
+	if (!editorUi.editor.cancelFirst)
+	{
+		td.appendChild(genericBtn);
+	}
+	
+	td.style.paddingTop = '14px';
+	td.style.whiteSpace = 'nowrap';
+	td.setAttribute('align', 'right');
+	row.appendChild(td);
+
+	tbody.appendChild(row);
+	table.appendChild(tbody);
+	this.container = table;
+	
+
+	
+};
 
 var OpenDialog = function()
 {

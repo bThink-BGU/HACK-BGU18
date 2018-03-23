@@ -1,6 +1,21 @@
 /* global bp */
 importPackage(Packages.com.mxgraph.model);
 
+function SubmissionAddedAll() {
+	return bp.EventSet( "SubmissionAddedAll", function(ev){
+		  var e = JSON.parse(ev.name);
+		  return e.name == "SubmissionAdded";
+		});
+}
+
+function SubmissionAdded(id) {
+	return bp.EventSet( "SubmissionAddedAll", function(ev){
+		  var e = JSON.parse(ev.name);
+		  return e.name == "SubmissionAdded" && e.courseId == id;
+		});
+}
+
+
 function goToFollowers(c, contxt, ths, bp) {
 
 	var edg = mxGraphModel.getEdges(model, c, false, true, true);

@@ -26,7 +26,6 @@ public class SerializationUtils {
 		mapper = new ObjectMapper(); //This is thread safe
 		mapper.enable(SerializationFeature.INDENT_OUTPUT);
 		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-//		mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
 	}
 	
 	public String serialize(Object object) throws JsonProcessingException {
@@ -34,7 +33,6 @@ public class SerializationUtils {
 			return mapper.writerWithDefaultPrettyPrinter().writeValueAsString(object);
 		}
 		catch (JsonProcessingException e) {
-//			log.warn("Failed to serialize object to json: "+object, e);
 			throw e;
 		}
 	}
@@ -47,7 +45,6 @@ public class SerializationUtils {
 			return mapper.readValue(json, clazz);
 		}
 		catch (IOException e) {
-//			log.warn("Failed to deserialize json string: '"+json+"', class: '"+clazz+"'");
 			throw e;
 		}
 	}
@@ -61,12 +58,6 @@ public class SerializationUtils {
 		Object result = getObjectMapper().readValue(json, valueTypeRef);
 		return result;
 	}
-	
-//	private static TypeReference<List<MoodleUser>> com_fasterxml_jackson_core_type_TypeReference_java_util_List_hackbgu_bgu_ac_il_services_MoodleUser(){
-//        return new TypeReference<List<MoodleUser>>() {
-//            //Empty
-//        };
-//    }
 
 	public ObjectMapper getObjectMapper() {
 		return mapper;

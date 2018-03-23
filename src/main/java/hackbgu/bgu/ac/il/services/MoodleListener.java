@@ -1,16 +1,12 @@
 package hackbgu.bgu.ac.il.services;
 
-import static java.util.concurrent.TimeUnit.SECONDS;
-
-import java.io.PrintWriter;
-import java.net.URL;
-import java.net.URLConnection;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 
 import hackbgu.bgu.ac.il.model.Assignment;
@@ -77,23 +73,21 @@ public class MoodleListener implements Runnable{
 			}
 		}
 	}
+	
+	private void sendEvent(String event) throws URISyntaxException {
+		
+		final MoodleListenerEndpoint clientEndPoint = new MoodleListenerEndpoint(new URI("ws://bpcoders.elyasaf.net:8090/eventqueue"));
 
-	private void sendEvent(String event) {
-		try {
-			System.out.println("sending event: " + event);
-            URL url = new URL("http://bpcoders.elyasaf.net:8090/eventqueue");
-            URLConnection urlConnection = url.openConnection();
-            urlConnection.setDoOutput(true);
-            PrintWriter writer = new PrintWriter(urlConnection.getOutputStream());
-            writer.println(event);
-            writer.flush();
-            writer.close();
-        }
-		catch(Exception e){
-			e.printStackTrace();
-		}
-	}
+        // add listener
+        clientEndPoint.addMessageHandler(new MoodleListenerEndpoint.MessageHandler() {
+            public void handleMessage(String message) {
+                System.out.println(message);
+            }
+        });
 
+        // send message to websocket
+        clientEndPoint.sendMessage(event);
+	 }
 
 	private String createEvent(User user, Assignment ass, Submission sub) {
 		if (sub.gradingstatus.equals("notgraded")){
@@ -108,7 +102,6 @@ public class MoodleListener implements Runnable{
 		else{
 			return null;
 		}
-		
 	}
 
 	@Override

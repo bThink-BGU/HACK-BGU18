@@ -7,5 +7,6 @@ public class Assignment {
 	public String name;
 	public String duedate;
 	public String course;
+	public String courseShortName;
 	public List<Submission> submissions;
 }

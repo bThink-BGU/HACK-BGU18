@@ -17,25 +17,7 @@ import hackbgu.bgu.ac.il.model.Users;
 public class MoodleListener implements Runnable{
 	private SerializationUtils serializationUtils = new SerializationUtils();
 	private HashMap<String, List<String>> sentEvents = new HashMap<>();
-	
-//	private final ScheduledExecutorService scheduler =
-//		     Executors.newScheduledThreadPool(1);
-//
-//   public void listen() {
-//     final Runnable poll = new Runnable() {
-//       public void run() { try {
-//		pollMoodle();
-//		} catch (Throwable e) {
-//			// Do Nothing
-//		} }
-//     };
-//     
-//    final ScheduledFuture<?> listenHandle = scheduler.scheduleAtFixedRate(poll, 10, 10, SECONDS);
-//    scheduler.schedule(new Runnable() {
-//       public void run() { listenHandle.cancel(true); }
-//     }, 60 * 60, SECONDS);
-//   }
-   
+
    public void pollMoodle() throws Exception {
 	   MoodleService moodleService = new MoodleServiceImpl();
 	   List<User> allUsers = serializationUtils.deserialize(moodleService.getAllUsers(), Users.class).users;
@@ -75,7 +57,7 @@ public class MoodleListener implements Runnable{
 	}
 	
 	private void sendEvent(String event) throws URISyntaxException {
-		
+		System.out.println("Sending event: " + event);
 		final MoodleListenerEndpoint clientEndPoint = new MoodleListenerEndpoint(new URI("ws://bpcoders.elyasaf.net:8090/eventqueue"));
 
         // add listener
@@ -93,9 +75,9 @@ public class MoodleListener implements Runnable{
 		if (sub.gradingstatus.equals("notgraded")){
 			return "{" + 
 				"name: \"AssignmentAdded\", " + 
-				"courseId: " + ass.course + "," +
-				"dueDate: " + ass.duedate + "," +
-				"attemptNumber: " + sub.attemptnumber + "," +
+				"courseShortName: " + ass.courseShortName + ", " +
+				"dueDate: " + ass.duedate + ", " +
+				"attemptNumber: " + sub.attemptnumber + ", " +
 				"gradingStatus: " + sub.gradingstatus +
 			"}";
 		}

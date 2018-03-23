@@ -52,16 +52,22 @@ public class MoodleServiceImpl implements MoodleService {
 		List<Course> serCourses = (serializationUtils.deserialize(sendRest, Courses.class)).courses;
 		List<Assignment> assignments = new ArrayList<>();
 		for (Course course : serCourses){
+			Optional<Course> optShortName = courses.stream().filter(c->c.id.equals(course.id)).findFirst();
+			String shortname = null;
+			if (optShortName.isPresent()){
+				shortname = optShortName.get().shortname;
+			}
 			for (Assignment ass : course.assignments){
 				String submissionsSer = getAssignmentSubmissions(ass.id);
 				List<Assignment> assignments2 = serializationUtils.deserialize(submissionsSer, Assignments.class).assignments;
 				List<Submission> submissions = assignments2.get(0).submissions;
-				
+				ass.courseShortName = shortname;
 				ass.submissions = submissions.stream().filter(sub ->sub.userid.equals(user.id)).collect(Collectors.toList());
 			}
 			assignments.addAll(course.assignments);
 		}
 		user.courseIds = serCourses.stream().map(course -> course.id).collect(Collectors.toList());
+		user.courseIdNumbers = courses.stream().map(course -> course.idnumber).collect(Collectors.toList());
 
 		user.assignments = assignments;
 		

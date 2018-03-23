@@ -1,12 +1,16 @@
 package hackbgu.bgu.ac.il.services;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import hackbgu.bgu.ac.il.model.Assignment;
+import hackbgu.bgu.ac.il.model.Assignments;
 import hackbgu.bgu.ac.il.model.Course;
 import hackbgu.bgu.ac.il.model.Courses;
+import hackbgu.bgu.ac.il.model.Submission;
 import hackbgu.bgu.ac.il.model.User;
 
 public class MoodleServiceImpl implements MoodleService {
@@ -30,6 +34,45 @@ public class MoodleServiceImpl implements MoodleService {
 		return serializationUtils.serialize(user);
 	}
 	
+	public String getAssignmentStatus() throws Exception{
+		String getCourses = MoodleOperation.getAssignmentStatus.getOperation() + "&userid=" + 4 + "&assignid="+ 1;
+		return restClient.sendRest(getCourses);
+	}
+	
+	public String getUserWithAssignments(String username) throws Exception {
+		User user = getUserByUsername(username);
+		String response = getCoursesOfUserById(user.id);
+		List<Course> courses = ((List<Course>)serializationUtils.deserializeGeneric(response, TypeReferenceSerializationHelper.class, List.class, Course.class));
+		String coursesIdsParameter = "";
+		for (Course course : courses){
+			coursesIdsParameter= coursesIdsParameter + "&courseids%5B%5D="+course.id;
+		}
+		String getAssignments = MoodleOperation.getAssignments.getOperation() + coursesIdsParameter;
+		String sendRest = restClient.sendRest(getAssignments);
+		List<Course> serCourses = (serializationUtils.deserialize(sendRest, Courses.class)).courses;
+		List<Assignment> assignments = new ArrayList<>();
+		for (Course course : serCourses){
+			for (Assignment ass : course.assignments){
+				String submissionsSer = getAssignmentSubmissions(ass.id);
+				List<Assignment> assignments2 = serializationUtils.deserialize(submissionsSer, Assignments.class).assignments;
+				List<Submission> submissions = assignments2.get(0).submissions;
+				
+				ass.submissions = submissions.stream().filter(sub ->sub.userid.equals(user.id)).collect(Collectors.toList());
+			}
+			assignments.addAll(course.assignments);
+		}
+		user.courseIds = serCourses.stream().map(course -> course.id).collect(Collectors.toList());
+
+		user.assignments = assignments;
+		
+		return serializationUtils.serialize(user);
+	}
+	
+	public String getAssignmentSubmissions(String assignmentId) throws Exception {
+		String getCourses = MoodleOperation.getSubmissionsForAssignment.getOperation() + "&assignmentids%5B%5D=" + assignmentId;
+		return restClient.sendRest(getCourses);
+	}
+	
 	public String getCourse(String courseId) throws Exception {
 		String getCourses = MoodleOperation.getCourses.getOperation();
 		String response = restClient.sendRest(getCourses);
@@ -43,11 +86,12 @@ public class MoodleServiceImpl implements MoodleService {
 	
 	public static void main(String[] args) throws Exception{
 		MoodleServiceImpl service = new MoodleServiceImpl();
-		System.out.println(service.getCourse("3"));
+//		System.out.println(/*service.getUserAssignments("asadon")*/service.getAssignmentStatus());
+		System.out.println(service.getUserWithAssignments("asadon"));
 	}
 	
 	public String getAllUsers() throws IOException {
-		String getUsers = MoodleOperation.getAllUsers.getOperation();
+		String getUsers = MoodleOperation.getAllUsers.getOperation() + "&criteria[0][key]=email&criteria[0][value]=%%";
 		return restClient.sendRest(getUsers);
 	}
 

@@ -10,4 +10,5 @@ public class User {
 	public String email;
 	public List<String> courseIds;
 	public String officehours;
+	public List<Assignment> assignments;
 }

@@ -13,7 +13,7 @@ export class ProfileComponent<Item> {
 	private itemDoc: AngularFirestoreDocument<Item>;
 	item: Observable<Item>;
 	constructor(private afs: AngularFirestore) {
-		this.itemDoc = afs.doc<Item>('user/owGR0jSCXX3Jv05RciE6');
+		this.itemDoc = afs.doc<Item>('user/ItSHGnNRGHb52zpnXzSd');
 	    this.item = this.itemDoc.valueChanges();
 	}
 	update(item: Item) {

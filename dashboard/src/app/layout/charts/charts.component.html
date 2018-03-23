@@ -1,113 +1,48 @@
 <div [@routerTransition]>
     <app-page-header [heading]="'Courses'" [icon]="'fa-bar-chart-o'"></app-page-header>
     <div class="row">
-        <div class="col col-sm-6">
-            <div class="card mb-3">
-                <div class="card-header">
-                    חלוקת נק"ז לפי סמסטר
-                </div>
-                <div class="card-body">
-                    <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions" [legend]="barChartLegend" [chartType]="barChartType" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)">
-                    </canvas>
-                </div>
-                <!--<div class="card-footer">-->
-                    <!--<button class="btn btn-info btn-sm" (click)="randomize()">Update</button>-->
-                <!--</div>-->
-            </div>
-        </div>
-        <div class="col col-sm-6">
-            <div class="card mb-3">
-                <div class="card-header">
-                    טבלת נק"ז בתואר
-                </div>
-                <div class="card-body">
-                    <canvas baseChart height="180px" [data]="doughnutChartData" [labels]="doughnutChartLabels" [chartType]="doughnutChartType" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)">
-                    </canvas>
-                </div>
-            </div>
-        </div>
+	    <!--<div>{{(obj | async)?.fruit}}</div>-->
+	    <div class="card mb-3">
+	        <div class="card-header">רשימת הקורסים לסמסטר</div>
+	        <table class="card-body table table-hover">
+	            <thead>
+	            <tr>
+	                <th>שם הקורס</th>
+	                <th>מספר קורס</th>
+	                <th>נק"ז</th>
+	            </tr>
+	            </thead>
+	            <tbody>
+	            <tr *ngFor="let course of courses | async" (mouseover)="onMouseOver($event)" (mouseleave)="onMouseLeave()">
+	            	<th scope="row"></th>
+	                <td>{{course.name}}</td>
+	                <td>{{course.id}}</td>
+	                <td>{{course.nakaz}}</td>
+	            </tr>
+	            </tbody>
+	        </table>
+	    </div>
     </div>
-    <div>{{(obj | async)?.fruit}}</div>
-    <div class="card-header">
-                    רשימת קורסים לסמסטר
-    </div>
+    <div class="row" *ngIf="hoveredCourse">
+	    <div class="card-header">סגל הקורס</div>
             <div class="card-body table-responsive">
                 <table class="table">
                     <thead>
                 <tr>
-                        <th>#</th>
-                        <th>שם הקורס</th>
-                        <th>מספר הקורס</th>
-                        <th>כיתת לימוד ושעה</th>
-                        <th>כיתת תרגול ושעה</th>
+                    <th>תפקיד</th>                	
+                    <th>שם פרטי</th>
+                    <th>שם משפחה</th>
+                    <th>שעות קבלה</th>
                 </tr>
                 </thead>
                    <tbody>
-                <tr>
-                       <th scope="row">1</th>
-                       <td>Mark</td>
-                        <td>Otto</td>
-                    </tr>
-                <tr>
-                        <th scope="row">2</th>
-                        <td>Jacob</td>
-                        <td>Thornton</td>
-                    </tr>
-                <tr>
-                        <th scope="row">3</th>
-                        <td>Larry</td>
-                        <td>the Bird</td>
+                <tr *ngFor="let user of users | async">
+                       <th scope="row"></th>
+                       <td>מרצה</td>
+                        <td>{{user.first_name}}</td>
                     </tr>
                </tbody>
                 </table>
             </div>
-    <!--<app-config></app-config>-->
-    <!--<div class="row">-->
-        <!--<div class="col col-sm-6">-->
-            <!--<div class="card mb-3">-->
-                <!--<div class="card-header">-->
-                    <!--Radar Chart-->
-                <!--</div>-->
-                <!--<div class="card-body">-->
-                    <!--<canvas baseChart height="150px" [datasets]="radarChartData" [labels]="radarChartLabels" [chartType]="radarChartType" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)">-->
-                    <!--</canvas>-->
-                <!--</div>-->
-            <!--</div>-->
-        <!--</div>-->
-        <!--<div class="col col-sm-6">-->
-            <!--<div class="card mb-3">-->
-                <!--<div class="card-header">-->
-                    <!--Pie Chart-->
-                <!--</div>-->
-                <!--<div class="card-body">-->
-                    <!--<canvas baseChart height="150px" [data]="pieChartData" [labels]="pieChartLabels" [chartType]="pieChartType" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)">-->
-                    <!--</canvas>-->
-                <!--</div>-->
-            <!--</div>-->
-        <!--</div>-->
-    <!--</div>-->
-    <!--<div class="row">-->
-        <!--<div class="col col-sm-6">-->
-            <!--<div class="card mb-3">-->
-                <!--<div class="card-header">-->
-                    <!--Polar Area Chart-->
-                <!--</div>-->
-                <!--<div class="card-body">-->
-                    <!--<canvas baseChart height="130px" [data]="polarAreaChartData" [labels]="polarAreaChartLabels" [legend]="polarAreaLegend" [chartType]="polarAreaChartType" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)">-->
-                    <!--</canvas>-->
-                <!--</div>-->
-            <!--</div>-->
-        <!--</div>-->
-        <!--<div class="col col-sm-6">-->
-            <!--<div class="card mb-3">-->
-                <!--<div class="card-header">-->
-                    <!--Line Chart-->
-                <!--</div>-->
-                <!--<div class="card-body">-->
-                    <!--<canvas baseChart height="130" [datasets]="lineChartData" [labels]="lineChartLabels" [options]="lineChartOptions" [colors]="lineChartColors" [legend]="lineChartLegend" [chartType]="lineChartType" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)">-->
-                    <!--</canvas>-->
-                <!--</div>-->
-            <!--</div>-->
-        <!--</div>-->
-    <!--</div>-->
+        </div>
 </div>

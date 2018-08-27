@@ -38,20 +38,22 @@ public class EventQueue extends Endpoint implements MessageHandler.Whole<String>
 			RunServlet.rnr.addListener(new BProgramRunnerListenerAdapter() {
 				public void eventSelected(BProgram bp, BEvent event) {
 					if (remote != null) {
-						System.out.println("Sending:"+event.name);
+						LOG.info("Sending:" + event.name);
 						remote.sendText(event.name);
 					}
 				}
+
 			});
 		}
 	}
+
 
 	public void onMessage(String message) {
 		LOG.info("Enquing external event {}", message);
 
 		if (RunServlet.bprog != null) {
-			RunServlet.bprog.enqueueExternalEvent(new BEvent(message));			
-			
+			RunServlet.bprog.enqueueExternalEvent(new BEvent(message));
+
 		}
 	}
 }

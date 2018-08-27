@@ -38,7 +38,7 @@ public class RunServlet extends HttpServlet {
 	public static BProgramRunner rnr;
 
 	private static Thread thread;
-	
+
 	/**
 	 * Handles save request and prints XML.
 	 */
@@ -82,13 +82,15 @@ public class RunServlet extends HttpServlet {
 			thread.interrupt();
 
 		// Start a new deployment
-		bprog = new SingleResourceBProgram("rungraph.js");	
+		bprog = new SingleResourceBProgram("rungraph.js");
 		bprog.putInGlobalScope("model", model);
 		bprog.appendSource(functions);
 		bprog.setDaemonMode(true);
 
 		rnr = new BProgramRunner(bprog);
 		rnr.addListener(new PrintBProgramRunnerListener());
+
+		IFTTTReporter.listenTo(rnr);
 
 		thread = new Thread() {
 			public void run() {

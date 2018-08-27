@@ -12,7 +12,6 @@ import org.eclipse.jetty.websocket.jsr356.server.ServerContainer;
 import org.eclipse.jetty.websocket.jsr356.server.deploy.WebSocketServerContainerInitializer;
 
 import hackbgu.bgu.ac.il.services.DashboardServlet;
-import hackbgu.bgu.ac.il.services.MoodleService;
 
 public class BPServer {
 	private Server server;
@@ -33,6 +32,9 @@ public class BPServer {
 		//context.addServlet(new ServletHolder(new ExportServlet()), "/export");
 		context.addServlet(new ServletHolder(new FlowOpenServlet()), "/open");
 		context.addServlet(new ServletHolder(new RunServlet()), "/run");
+		context.addServlet(new ServletHolder(new EventPushSerlet()), "/push");
+		
+		
 		context.addServlet(new ServletHolder(new DashboardServlet()), "/dashboard/users/*");
 		context.addServlet(new ServletHolder(new DashboardServlet()), "/dashboard/courses/*");
 

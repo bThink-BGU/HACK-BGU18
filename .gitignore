@@ -1,25 +1,44 @@
-target/
-pom.xml.tag
-pom.xml.releaseBackup
-pom.xml.versionsBackup
-pom.xml.next
-release.properties
-dependency-reduced-pom.xml
-buildNumber.properties
-.mvn/timing.properties
-.DS_Store
+# See http://help.github.com/ignore-files/ for more about ignoring files.
 
-#eclipse
-.metadata
-.metadata.new
-.pydevproject
-.recommenders
+# compiled output
+/dist
+/tmp
+/out-tsc
+/target
+
+# dependencies
+/node_modules
+
+# IDEs and editors
+/.idea
 .project
-.settings
 .classpath
-.idea
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
 
-.classpath
+# IDE - VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
 
-.settings/org.eclipse.jdt.core.prefs
-*.log
+# misc
+/.sass-cache
+/connect.lock
+/coverage
+/libpeerconnection.log
+npm-debug.log
+testem.log
+/typings
+
+# e2e
+/e2e/*.js
+/e2e/*.map
+
+# System Files
+.DS_Store
+Thumbs.db
+/package-lock.json

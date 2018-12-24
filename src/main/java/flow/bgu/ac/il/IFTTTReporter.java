@@ -30,7 +30,7 @@ public class IFTTTReporter {
 	static private void sendToIFTTT(String name) {
 
 		try {
-			URL url = new URL("https://maker.ifttt.com/trigger/BPEvent/with/key/3hESrTy8_v6hRvXSerrDS");
+			URL url = new URL("https://maker.ifttt.com/trigger/BPEvent/with/key/.....");
 			URLConnection con = url.openConnection();
 			HttpsURLConnection http = (HttpsURLConnection) con;
 			http.setRequestMethod("POST");
